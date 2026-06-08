@@ -1,0 +1,25 @@
+package UniversityFacultyApp;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DatabaseManager {
+
+    public static Connection connect() {
+
+        try {
+
+            return DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/school_db",
+                    "root",
+                    ""
+            );
+
+        } catch(Exception e) {
+
+            e.printStackTrace();
+
+            return null;
+        }
+    }
+}
