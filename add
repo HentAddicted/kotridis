@@ -1,0 +1,97 @@
+package UniversityFacultyApp;
+
+import javax.swing.*;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class AddProfessorWindow extends JFrame {
+
+    JTextField firstName;
+
+    JTextField lastName;
+
+    JTextField hours;
+
+    JButton saveButton;
+
+    public AddProfessorWindow() {
+
+        setTitle("Add Professor");
+
+        setSize(300,250);
+
+        setLayout(new FlowLayout());
+
+        firstName =
+        new JTextField(20);
+
+        lastName =
+        new JTextField(20);
+
+        hours =
+        new JTextField(20);
+
+        saveButton =
+        new JButton("Save");
+
+        add(new JLabel("First Name"));
+        add(firstName);
+
+        add(new JLabel("Last Name"));
+        add(lastName);
+
+        add(new JLabel("Hours"));
+        add(hours);
+
+        add(saveButton);
+
+        saveButton.addActionListener(
+        e -> saveProfessor());
+
+        setVisible(true);
+    }
+
+    public void saveProfessor() {
+
+        try {
+
+            Connection c =
+            DatabaseManager.connect();
+
+            String sql =
+            "INSERT INTO teachers(first_name,last_name,availability_hours) VALUES(?,?,?)";
+
+            PreparedStatement pst =
+            c.prepareStatement(sql);
+
+            pst.setString(
+            1,
+            firstName.getText());
+
+            pst.setString(
+            2,
+            lastName.getText());
+
+            pst.setInt(
+            3,
+            Integer.parseInt(
+            hours.getText()));
+
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(
+            null,
+            "Saved Successfully");
+
+        }
+
+        catch(Exception e) {
+
+            JOptionPane.showMessageDialog(
+            null,
+            e.getMessage());
+
+        }
+    }
+}
