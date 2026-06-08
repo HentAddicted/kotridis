@@ -1,0 +1,31 @@
+package UniversityFacultyApp;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class WelcomeWindow extends JFrame {
+
+    JButton insertProfessor;
+
+    public WelcomeWindow() {
+
+        setTitle("Faculty System");
+
+        setSize(400,200);
+
+        setLayout(new FlowLayout());
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        insertProfessor =
+        new JButton("Insert Professor");
+
+        add(insertProfessor);
+
+        insertProfessor.addActionListener(e -> {
+
+            new AddProfessorWindow();
+
+        });
+    }
+}
